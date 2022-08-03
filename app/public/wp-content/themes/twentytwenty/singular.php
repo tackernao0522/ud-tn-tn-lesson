@@ -13,7 +13,7 @@ get_header();
 ?>
 
 <main id="site-content">
-
+	<p>singular.php</p>
 	<?php
 
 	if ( have_posts() ) {
