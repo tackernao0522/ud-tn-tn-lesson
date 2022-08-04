@@ -391,3 +391,93 @@ single-post.php
 + `app/public/wp-cintent/themes/twentytwenty/singular.php`を削除<br>
 
 + これで http://mysite.local/hello-world/ にアクセスして Query Monitorを確認すると`index.php`を指している<br>
+
+## 8. 最小構成のテーマを作成してみよう
+
++ WP管理画面の `外観` => `テーマ`をクリック<br>
+
++ `wp-content/themes/mytheme`ディレクトリを作成<br>
+
++ 管理画面の`テーマ`画面をリロードすると`mytheme`を認識しようとしているがエラーが出ている<br>
+
++ `app/public/wp-content/themes/mytheme/style.css`を作成<br>
+
++ 管理画面の`テーマ`画面をリロードするとエラー内容が変わる<br>
+
++ `app/public/wp-content/themes/mytheme/index.php`を作成<br>
+
++ 管理画面の`テーマ`画面をリロードするとエラーが出なくなる(index.php と style.cssは必須ファイルである)<br>
+
++ `有効化`すると画面は真っ白だがアクセスできるようになる<br>
+
++ `app/public/wp-content/themes/mytheme/index.php`を編集<br>
+
+```php:index.php
+新しいテーマです
+```
+
++ アクセスすると反映している<br>
+
++ `app/public/wp-content/themes/mytheme/style.css`を編集<br>
+
+```css:style.css
+/*
+Theme Name: Taka's テーマ
+*/
+```
+
++ 管理画面の`テーマ`画面をリロードするとテーマ名が変わる<br>
+
++ `テーマの詳細`をクリックしてもテーマ名が変わっているのがわかる<br>
+
++ `app/public/wp-content/themes/mytheme/style.css`を編集<br>
+
+```css:style.css
+/*
+Theme Name: Taka's テーマ
+Version: 1.0
+*/
+```
+
++ `テーマの詳細`をクリックするとVersionも反映されているのがわかる<br>
+
++ `app/public/wp-content/themes/mytheme/style.css`を編集<br>
+
+```css:style.css
+/*
+Theme Name: Taka's テーマ
+Version: 1.0
+Author: たかき
+*/
+```
+
++ `テーマの詳細`をクリックするとAuthorも反映されているのがわかる<br>
+
++ `app/public/wp-content/themes/mytheme/style.css`を編集<br>
+
+```css:style.css
+/*
+Theme Name: Taka's テーマ
+Version: 1.0
+Author: たかき
+Description: このテーマは、たかきの専用テーマです
+*/
+```
+
++ `テーマの詳細`をクリックするとDescriptionも反映されているのがわかる<br>
+
++ [テーマの作成](https://wpdocs.osdn.jp/%E3%83%86%E3%83%BC%E3%83%9E%E3%81%AE%E4%BD%9C%E6%88%90#.E3.83.86.E3.83.BC.E3.83.9E.E3.82.B9.E3.82.BF.E3.82.A4.E3.83.AB.E3.82.B7.E3.83.BC.E3.83.88) <br>
+
++ `app/public/wp-content/themes/mytheme/index.php`を編集<br>
+
+```php:index.php
+<?php the_title(); ?>
+```
+
++ アクセスすると画面に`Hello world!`と表示される<br>
+
++ WP管理画面の `投稿` => `新規追加`をクリック<br>
+
++ `x`をクリックして、`タイトルを追加`に `新しい投稿です`と入力して `公開`ボタンをクリックしてさらに `公開`ボタンをクリック<br>
+
++ WP管理画面の`投稿一覧`に戻ってlocalブラウザにアクセスするとタイトルが変わっている<br>
