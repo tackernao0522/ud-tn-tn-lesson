@@ -361,3 +361,33 @@ single-post.php
 ```
 
 + Recent Postの `Hello world`にアクセスすると`single-post.php`にアクセスされる<br>
+
+## 7. Query Monitorでテンプレートを確認しよう
+
++ WP 管理画面にアクセス<br>
+
++ メニューの `プラグイン`をクリック<br>
+
++ `新規追加`ボタンをクリック<br>
+
++ `プラグインの検索`の中に`query monitor`と入力する<br>
+
++ `Query Monitor` を `今すぐインストール`する<br>
+
++ `有効化`をクリック<br>
+
++ `app/public/wp-cintent/themes/twentytwenty/single-post.php`を削除<br>
+
++ `app/public/wp-cintent/themes/twentytwenty/single.php`を削除<br>
+
++ これで http://mysite.local/hello-world/ にアクセスして Query Monitorを確認すると`singular.php`を指している<br>
+
++ `app/public/wp-cintent/themes/twentytwenty/single.php`を作成して`singular.php`の中身をコピーする<br>
+
++ これで http://mysite.local/hello-world/ にアクセスして Query Monitorを確認すると`single.php`を指している<br>
+
++ `app/public/wp-cintent/themes/twentytwenty/single.php`を削除<br>
+
++ `app/public/wp-cintent/themes/twentytwenty/singular.php`を削除<br>
+
++ これで http://mysite.local/hello-world/ にアクセスして Query Monitorを確認すると`index.php`を指している<br>
