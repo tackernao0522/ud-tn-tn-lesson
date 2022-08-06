@@ -467,7 +467,7 @@
           <a href="post.html">
             <h2 class="post-title">
               <?php $title = the_title('■', '●', false); ?>
-              // '新しい'を検索してその文字列を'古い'に置き換える
+              // '新しい'を検索してその文字列を'古い'に置き換える 上記をtrueにすると上記が表示され、falseだと下記が表示される？
               <?php echo str_replace('新しい', '古い', $title); ?>
             </h2>
             <h3 class="post-subtitle">
