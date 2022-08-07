@@ -19,8 +19,6 @@ get_header();
 
 <main id="site-content">
 
-  <p>index.phpです</p>
-
 	<?php
 
 	$archive_title    = '';
