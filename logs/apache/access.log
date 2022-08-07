@@ -1120,3 +1120,6 @@
 127.0.0.1 - - [07/Aug/2022:13:28:00 +0900] "GET /img/home-bg.jpg HTTP/1.0" 404 265586
 127.0.0.1 - - [07/Aug/2022:13:28:02 +0900] "GET /favicon.ico HTTP/1.0" 302 -
 127.0.0.1 - - [07/Aug/2022:13:28:18 +0900] "POST /wp-admin/admin-ajax.php HTTP/1.0" 200 47
+127.0.0.1 - - [07/Aug/2022:13:30:18 +0900] "POST /wp-admin/admin-ajax.php HTTP/1.0" 200 47
+127.0.0.1 - - [07/Aug/2022:13:31:19 +0900] "POST /wp-admin/admin-ajax.php HTTP/1.0" 200 47
+127.0.0.1 - - [07/Aug/2022:13:33:21 +0900] "POST /wp-admin/admin-ajax.php HTTP/1.0" 200 47
