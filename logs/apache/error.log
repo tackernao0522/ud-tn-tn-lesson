@@ -16,3 +16,6 @@ AH00558: httpd: Could not reliably determine the server's fully qualified domain
 AH00558: httpd: Could not reliably determine the server's fully qualified domain name, using groovy-no-MacBook-Pro.local. Set the 'ServerName' directive globally to suppress this message
 [Sat Aug 06 11:08:45.260997 2022] [mpm_event:notice] [pid 908:tid 4461899200] AH00489: Apache/2.4.43 (Unix) configured -- resuming normal operations
 [Sat Aug 06 11:08:45.261570 2022] [core:notice] [pid 908:tid 4461899200] AH00094: Command line: '/Users/groovy/Library/Application Support/Local/lightning-services/apache-2.4.43+7/bin/darwin/bin/httpd -D FOREGROUND -f /Users/groovy/Library/Application Support/Local/run/RGyZbAiAg/conf/apache/apache2.conf'
+AH00558: httpd: Could not reliably determine the server's fully qualified domain name, using groovy-no-MacBook-Pro.local. Set the 'ServerName' directive globally to suppress this message
+[Sun Aug 07 12:24:08.688422 2022] [mpm_event:notice] [pid 2005:tid 4590230976] AH00489: Apache/2.4.43 (Unix) configured -- resuming normal operations
+[Sun Aug 07 12:24:08.689907 2022] [core:notice] [pid 2005:tid 4590230976] AH00094: Command line: '/Users/groovy/Library/Application Support/Local/lightning-services/apache-2.4.43+7/bin/darwin/bin/httpd -D FOREGROUND -f /Users/groovy/Library/Application Support/Local/run/RGyZbAiAg/conf/apache/apache2.conf'
