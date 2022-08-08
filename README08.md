@@ -1,3 +1,12 @@
+## 20. 「抜粋」の使い方 - the_excerpt<br>
+
+「抜粋」は本文の中から一部を表示する仕組み 続く部分は `[...]`と表示される<br>
+
++ [the_excerpt()](https://wpdocs.osdn.jp/%E3%83%86%E3%83%B3%E3%83%97%E3%83%AC%E3%83%BC%E3%83%88%E3%82%BF%E3%82%B0/the_excerpt)<br>
+
++ `mysite/app/public/wp-content/themes/myblog/index.php`を編集<br>
+
+```php:index.php
 <!DOCTYPE html>
 <html lang="en">
 
@@ -80,7 +89,7 @@
                   <?php the_title(); ?>
                 </h2>
                 <h3 class="post-subtitle">
-                  <?php the_excerpt(); ?>
+                  <?php the_excerpt(); ?> // 編集
                 </h3>
               </a>
               <p class="post-meta">Posted by
@@ -151,3 +160,34 @@
 </body>
 
 </html>
+```
+
++ WP管理画面で投稿新規追加で "抜粋の練習です"とタイトルに入力する<br>
+
++ 内容に下記を入力してみる。そして公開する<br>
+
+```
+<!-- wp:paragraph -->
+<p>この投稿は抜粋を練習しています。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2>the_excerpt() と the_content()</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>敢えて<a href="https://wpdocs.osdn.jp/%E3%83%86%E3%83%B3%E3%83%97%E3%83%AC%E3%83%BC%E3%83%88%E3%82%BF%E3%82%B0/the_content">the_content()</a> 関数を使うことに意味がある場合があります。 それはこの関数が、投稿本文内に <a href="https://wpdocs.osdn.jp/Writing_Posts#Visual_Versus_HTML_Editor">&lt;!--more--> タグ</a>が使用されているかどうかによって表示内容が変わるためです。&lt;!--more--> タグは、挿入した位置で本文を2つに分けます。メインブログページやアーカイブといったリスト形式のページではこのタグより前の部分のみを表示します。個別投稿／ページでは（もちろん） &lt;!--more--> タグが無視され、本文全てを表示します。</p>
+<!-- /wp:paragraph -->
+```
+
++ WP管理画面の`投稿` => タイトルの`抜粋の練習です`をクリックする<br>
+
++ 右側上部の`投稿`をクリックする`<br>
+
++ `抜粋`をプルダウンする<br>
+
++ 抜粋を入力（任意）枠に下記を入力して更新をクリックしてサイトをリロードすると下記の入力して内容が反映される<br>
+
+```
+抜粋を入力してみました。
+```
