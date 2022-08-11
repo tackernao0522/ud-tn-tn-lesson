@@ -383,3 +383,230 @@ add_action('init', function () {
 
 </html>
 ```
+
+## 27. アイキャッチ画像を挿入しよう② - wp_get_attachment_image_src
+
++ [wp_get_attachment_image_src](https://wpdocs.osdn.jp/%E9%96%A2%E6%95%B0%E3%83%AA%E3%83%95%E3%82%A1%E3%83%AC%E3%83%B3%E3%82%B9/wp_get_attachment_image_src)<br>
+
++ `myblog`ディレクトリに移動<br>
+
+※ `wp_get_attachment_image_src()`はメディアライブラリから取り出す関数である<br>
+
++ `myblog/single.php`を編集<br>
+
+```php:single.php
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <?php get_header(); ?>
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <?php get_template_part('includes/header'); ?>
+
+  <?php if (have_posts()) : ?>
+    <?php while (have_posts()) : the_post(); ?>
+      <!-- Page Header -->
+      <?php
+      $id = get_post_thumbnail_id();
+      var_dump($id); // 24
+      $img = wp_get_attachment_image_src($id);
+      var_dump($img);
+      // 0 => string 'http://mysite.local/wp-content/uploads/2022/08/audience--150x150.jpg' (length=68)
+      // 1 => int 150
+      // 2 => int 150
+      // 3 => boolean true
+      ?>
+      <header class="masthead" style="background-image: url('<?php echo $img[0]; ?>')">
+        <div class="overlay"></div>
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-8 col-md-10 mx-auto">
+              <div class="post-heading">
+                <h1><?php the_title(); ?></h1>
+                <span class="meta">Posted by
+                  <?php the_author(); ?>
+                  on <?php the_date(); ?></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- Post Content -->
+      <article>
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-8 col-md-10 mx-auto">
+              <?php the_post_thumbnail(array(32, 32), array('alt' => 'アイキャッチ画像')); ?>
+              <?php the_content(); ?>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <hr>
+    <?php endwhile; ?>
+
+    <!-- <?php else : ?>
+    <p>記事が見つかりませんでした</p> -->
+  <?php endif; ?>
+
+  <!-- Footer -->
+  <?php get_template_part('includes/footer'); ?>
+
+  <?php get_footer(); ?>
+
+</body>
+
+</html>
+```
+
++ WP管理画面の`設定` => `メディア`をクリックしたところが画像のサイズ設定になる(デフォルトは`thumbnai`サイズになっている)<br>
+
++ `myblog/single.php`を編集<br>
+
+```php:single.php
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <?php get_header(); ?>
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <?php get_template_part('includes/header'); ?>
+
+  <?php if (have_posts()) : ?>
+    <?php while (have_posts()) : the_post(); ?>
+      <!-- Page Header -->
+      <?php
+      $id = get_post_thumbnail_id();
+      // var_dump($id);
+      $img = wp_get_attachment_image_src($id, 'large'); // 編集
+      // var_dump($img);
+      ?>
+      <header class="masthead" style="background-image: url('<?php echo $img[0]; ?>')">
+        <div class="overlay"></div>
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-8 col-md-10 mx-auto">
+              <div class="post-heading">
+                <h1><?php the_title(); ?></h1>
+                <span class="meta">Posted by
+                  <?php the_author(); ?>
+                  on <?php the_date(); ?></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- Post Content -->
+      <article>
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-8 col-md-10 mx-auto">
+              <?php the_post_thumbnail(array(32, 32), array('alt' => 'アイキャッチ画像')); ?>
+              <?php the_content(); ?>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <hr>
+    <?php endwhile; ?>
+
+    <!-- <?php else : ?>
+    <p>記事が見つかりませんでした</p> -->
+  <?php endif; ?>
+
+  <!-- Footer -->
+  <?php get_template_part('includes/footer'); ?>
+
+  <?php get_footer(); ?>
+
+</body>
+
+</html>
+```
+
++ `large`を1024から2048くらいにしても良い<br>
+
++ `myblog/single.php`を編集<br>
+
+```php:single.php
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <?php get_header(); ?>
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <?php get_template_part('includes/header'); ?>
+
+  <?php if (have_posts()) : ?>
+    <?php while (have_posts()) : the_post(); ?>
+      <!-- Page Header -->
+      <?php
+      if (has_post_thumbnail()) : // 追加
+        $id = get_post_thumbnail_id();
+        // var_dump($id);
+        $img = wp_get_attachment_image_src($id, 'large');
+      // var_dump($img);
+      else : // 追加(アイキャッチ画像を指定していない場合)
+        $img = array(get_template_directory_uri() . '/img/post-bg.jpg'); // 追加
+      endif; // 追加
+      ?>
+      <header class="masthead" style="background-image: url('<?php echo $img[0]; ?>')">
+        <div class="overlay"></div>
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-8 col-md-10 mx-auto">
+              <div class="post-heading">
+                <h1><?php the_title(); ?></h1>
+                <span class="meta">Posted by
+                  <?php the_author(); ?>
+                  on <?php the_date(); ?></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- Post Content -->
+      <article>
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-8 col-md-10 mx-auto">
+              <?php the_post_thumbnail(array(32, 32), array('alt' => 'アイキャッチ画像')); ?>
+              <?php the_content(); ?>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <hr>
+    <?php endwhile; ?>
+
+    <!-- <?php else : ?>
+    <p>記事が見つかりませんでした</p> -->
+  <?php endif; ?>
+
+  <!-- Footer -->
+  <?php get_template_part('includes/footer'); ?>
+
+  <?php get_footer(); ?>
+
+</body>
+
+</html>
+```
