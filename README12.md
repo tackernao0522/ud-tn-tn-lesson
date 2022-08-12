@@ -182,3 +182,134 @@
 
 </html>
 ```
+
+## 30. 固定ページのテンプレートを作成しよう
+
++ [テンプレート階層](https://unofficialtokyo.com/wordpress-template-hierarchy/)<br>
+
++ WP管理画面の`固定ページ` => `固定ページ一覧`をクリック<br>
+
++ `タイトル`にチェックを入れて => `一括操作` => `ゴミ箱へ移動` => `適用`をクリック<br>
+
++ `新規追加`をクリック<br>
+
++ `タイトルを追加` => `about`と入力<br>
+
++ `文章を入力`の箇所に説明などを入力する<br>
+
++ `公開`をクリック<br>
+
++ 再度 `公開`をクリック<br>
+
++ `固定ページを表示`をクリックしてみる<br>
+
++ `myblog $ mv about.html page.php`を実行<br>
+
++ `myblog/page.php`を編集<br>
+
+```php:page.php
+<!DOCTYPE html>
+<html <?php language_attributes(); ?>> // 編集
+
+<head>
+  <?php get_header(); ?> // 編集
+</head>
+
+<body <?php body_class(); ?>> // 編集
+
+  <!-- Navigation -->
+  <?php get_template_part('includes/header'); ?> // 編集
+
+  <!-- Page Header -->
+  <header class="masthead" style="background-image: url('img/about-bg.jpg')">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="page-heading">
+            <h1>About Me</h1>
+            <span class="subheading">This is what I do.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe nostrum ullam eveniet pariatur voluptates odit, fuga atque ea nobis sit soluta odio, adipisci quas excepturi maxime quae totam ducimus consectetur?</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius praesentium recusandae illo eaque architecto error, repellendus iusto reprehenderit, doloribus, minus sunt. Numquam at quae voluptatum in officia voluptas voluptatibus, minus!</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut consequuntur magnam, excepturi aliquid ex itaque esse est vero natus quae optio aperiam soluta voluptatibus corporis atque iste neque sit tempora!</p>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- Footer -->
+  <?php get_template_part('includes/footer'); ?> // 編集
+
+  <?php get_footer(); ?> // 編集
+
+</body>
+
+</html>
+```
+
++ `myblog/page.php`を編集<br>
+
+```php:page.php
+<!DOCTYPE html>
+<html <?php language_attributes(); ?>>
+
+<head>
+  <?php get_header(); ?>
+</head>
+
+<body <?php body_class(); ?>>
+
+  <!-- Navigation -->
+  <?php get_template_part('includes/header'); ?>
+
+  <?php if (have_posts()) : ?> // 追加
+    <?php while (have_posts()) : the_post(); ?> // 追加
+      <!-- Page Header -->
+      <header class="masthead" style="background-image: url('img/about-bg.jpg')">
+        <div class="overlay"></div>
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-8 col-md-10 mx-auto">
+              <div class="page-heading">
+                <h1><?php the_title(); ?></h1> // 編集
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- Main Content -->
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-md-10 mx-auto">
+            <?php the_content(); ?> // 編集
+          </div>
+        </div>
+      </div>
+
+      <hr>
+    <?php endwhile; ?> // 追加
+  <?php endif; ?> // 追加
+
+  <!-- Footer -->
+  <?php get_template_part('includes/footer'); ?>
+
+  <?php get_footer(); ?>
+
+</body>
+
+</html>
+```
+
++ WP管理画面の固定ページのaboutページに内容を入れて更新してみる<br>
