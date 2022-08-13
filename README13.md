@@ -175,3 +175,207 @@
 + `本文`も上と同じにした<br>
 
 + `更新`しておく<br>
+
+## 34. お問い合わせフォームを実装しよう
+
++ `myblog/contact.html`の中の `<form>から</form>`までをコピーする<br>
+
++ WP管理画面の `MW WP Form`をクリックして前回作った `お問い合わせ`をゴミ箱に入れておく<br>
+
++ `新規追加` => `タイトルを追加` => `お問い合わせ`と入力する<br>
+
++ 内容(テキストモード) => コピーしたフォームタグをペーストする<br>
+
+```
+<form name="sentMessage" id="contactForm" novalidate>
+  <div class="control-group">
+    <div class="form-group floating-label-form-group controls">
+      <label>Name</label>
+      <input type="text" class="form-control" placeholder="Name" id="name" required data-validation-required-message="Please enter your name.">
+      <p class="help-block text-danger"></p>
+    </div>
+  </div>
+  <div class="control-group">
+    <div class="form-group floating-label-form-group controls">
+      <label>Email Address</label>
+      <input type="email" class="form-control" placeholder="Email Address" id="email" required data-validation-required-message="Please enter your email address.">
+      <p class="help-block text-danger"></p>
+    </div>
+  </div>
+  <div class="control-group">
+    <div class="form-group col-xs-12 floating-label-form-group controls">
+      <label>Phone Number</label>
+      <input type="tel" class="form-control" placeholder="Phone Number" id="phone" required data-validation-required-message="Please enter your phone number.">
+      <p class="help-block text-danger"></p>
+    </div>
+  </div>
+  <div class="control-group">
+    <div class="form-group floating-label-form-group controls">
+      <label>Message</label>
+      <textarea rows="5" class="form-control" placeholder="Message" id="message" required data-validation-required-message="Please enter a message."></textarea>
+      <p class="help-block text-danger"></p>
+    </div>
+  </div>
+  <br>
+  <div id="success"></div>
+  <button type="submit" class="btn btn-primary" id="sendMessageButton">Send</button>
+</form>
+```
+
++ `<form>タグと閉じタグの</form>のみ削除する<br>
+
+```
+<div class="control-group">
+  <div class="form-group floating-label-form-group controls">
+    <label>Name</label>
+    <input type="text" class="form-control" placeholder="Name" id="name" required data-validation-required-message="Please enter your name.">
+    <p class="help-block text-danger"></p>
+  </div>
+</div>
+<div class="control-group">
+  <div class="form-group floating-label-form-group controls">
+    <label>Email Address</label>
+    <input type="email" class="form-control" placeholder="Email Address" id="email" required data-validation-required-message="Please enter your email address.">
+    <p class="help-block text-danger"></p>
+  </div>
+</div>
+<div class="control-group">
+  <div class="form-group col-xs-12 floating-label-form-group controls">
+    <label>Phone Number</label>
+    <input type="tel" class="form-control" placeholder="Phone Number" id="phone" required data-validation-required-message="Please enter your phone number.">
+    <p class="help-block text-danger"></p>
+  </div>
+</div>
+<div class="control-group">
+  <div class="form-group floating-label-form-group controls">
+    <label>Message</label>
+    <textarea rows="5" class="form-control" placeholder="Message" id="message" required data-validation-required-message="Please enter a message."></textarea>
+    <p class="help-block text-danger"></p>
+  </div>
+</div>
+<br>
+<div id="success"></div>
+<button type="submit" class="btn btn-primary" id="sendMessageButton">Send</button>
+```
+
++ フォームの編集をする
+
+```html:form.html
+<div class="control-group">
+  <div class="form-group floating-label-form-group controls">
+    <label>お名前</label> <!-- 編集 -->
+    <!-- 追加 テキストフィールドを選択してフォームタグを追加をクリックして name*に'myname'と入力 -->
+    <!-- idに'name'と入力 classに'form-control'と入力 sizeは省略されているので消しておく -->
+    <!-- placeholderに'お名前'と入力 -->
+    <!-- 'Insert'をクリック -->
+    [mwform_text name="myname" id="name" class="form-control" placeholder="お名前"] <!-- 追加される -->
+    <!-- <input type="text" class="form-control" placeholder="Name" id="name" required data-validation-required-message="Please enter your name."> 削除する　-->
+    <!-- <p class="help-block text-danger"></p>　削除する -->
+  </div>
+</div>
+<div class="control-group">
+  <div class="form-group floating-label-form-group controls">
+    <label>メールアドレス</label> <!-- 編集 -->
+    <!-- Email フィールドを選択して'フォームタグを追加'をクリック -->
+    <!-- name* => 'email', id => 'email', class => 'form-control', size => '削除する' placeholder => 'メールアドレス' => 'Insert'をクリック -->
+    [mwform_email name="email" id="email" class="form-control" placeholder="メールアドレス"] <!-- 追加される -->
+    <!-- <input type="email" class="form-control" placeholder="Email Address" id="email" required data-validation-required-message="Please enter your email address.">
+    <p class="help-block text-danger"></p> 削除する -->
+  </div>
+</div>
+<!-- <div class="control-group">
+  <div class="form-group col-xs-12 floating-label-form-group controls">
+    <label>Phone Number</label>
+    <input type="tel" class="form-control" placeholder="Phone Number" id="phone" required data-validation-required-message="Please enter your phone number.">
+    <p class="help-block text-danger"></p>
+  </div>
+</div> 今回は削除 -->
+<div class="control-group">
+  <div class="form-group floating-label-form-group controls">
+    <label>お問い合わせ内容</label> <!-- 編集 -->
+    <!-- テキストエリアを選択して'フォームタグを追加'をクリック -->
+    <!-- name* => 'message', id => 'message' class => 'form-control', colsは削除, rows => '5'のまま, placeholder => 'お問い合わせ内容' => 'Insert'をクリック -->
+    [mwform_textarea name="message" id="message" class="form-control" rows="5" placeholder="お問い合わせ内容"] <!-- 追加される -->
+    <!-- <textarea rows="5" class="form-control" placeholder="Message" id="message" required data-validation-required-message="Please enter a message."></textarea>
+    <p class="help-block text-danger"></p> 削除する -->
+  </div>
+</div>
+<br>
+<div id="success"></div>
+<!-- '確認ボタン'を選択 => 'フォームタグを追加' -->
+<!-- class => 'btn btn-primary' => 'Insert'をクリック -->
+<!-- 'Back Button'を選択 => 'フォームタグを追加' -->
+<!-- class => 'btn btn-secondary' => 'Insert'をクリック -->
+<!-- '送信ボタン'を選択 => 'フォームタグを追加' -->
+<!-- name => 'send', class => 'btn btn-primary', 'Insert'をクリック -->
+          [mwform_bconfirm class="btn btn-primary" value="confirm"]確認画面へ[/mwform_bconfirm][mwform_bback class="btn btn-secondary" value="back"]戻る[/mwform_bback][mwform_bsubmit name="send" class="btn btn-primary" value="send"]送信する[/mwform_bsubmit]<!-- 追加される -->
+<!-- <button type="submit" class="btn btn-primary" id="sendMessageButton">Send</button> -->
+```
+
+最終的に下記のようになる<br>
+
+```html:sample.html
+<div class="control-group">
+  <div class="form-group floating-label-form-group controls">
+    <label>お名前</label>
+    [mwform_text name="myname" id="name" class="form-control" placeholder="お名前"]
+  </div>
+</div>
+<div class="control-group">
+  <div class="form-group floating-label-form-group controls">
+    <label>メールアドレス</label>
+    [mwform_email name="email" id="email" class="form-control" placeholder="メールアドレス"]
+  </div>
+</div>
+<div class="control-group">
+  <div class="form-group floating-label-form-group controls">
+    <label>お問い合わせ内容</label>
+    [mwform_textarea name="message" id="message" class="form-control" rows="5" placeholder="お問い合わせ内容"]
+  </div>
+</div>
+<br>
+<div id="success"></div>
+[mwform_bconfirm class="btn btn-primary" value="confirm"]確認画面へ[/mwform_bconfirm][mwform_bback class="btn btn-secondary" value="back"]戻る[/mwform_bback][mwform_bsubmit name="send" class="btn btn-primary" value="send"]送信する[/mwform_bsubmit]
+```
+
++ `バリデーションルール` => `バリデーションルールを追加`をクリック<br>
+
++ `バリデーションと適用する項目` => `myname`<br>
+
++ `必須項目` => チェック<br>
+
++ `バリデーションルール` => `バリデーションルールを追加`をクリック<br>
+
++ `バリデーションと適用する項目` => `email`<br>
+
++ `必須項目` => チェック<br>
+
++ `メールアドレス` => チェック<br>
+
++ `バリデーションルール` => `バリデーションルールを追加`をクリック<br>
+
++ `バリデーションと適用する項目` => `message`<br>
+
++ `必須項目` => チェック<br>
+
++ `自動返信メール` => `email`と入力する<br>
+
++ `公開`をクリック<br>
+
++ `フォーム識別子`をコピー `[mwform_formkey key="40"]`<br>
+
++ `固定ページ` => `お問い合わせ`をクリック<br>
+
++ 下記のように編集<br>
+
+```
+お問い合わせ
+
+お問い合わせは、こちらのフォームに記述してください。
+
+[mwform_formkey key="40"] // コピーしたのをペーストする
+```
+
++ `更新`をクリック<br>
+
++ http://mysite.local/contact/ にアクセスしてみる<br>
