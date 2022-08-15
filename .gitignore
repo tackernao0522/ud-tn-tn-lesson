@@ -1,3 +1,5 @@
 .DS_Store
 logs/apache/*
 logs/php/*
+app/.DS_Store
+app/public/.DS_Store
