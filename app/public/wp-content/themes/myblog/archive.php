@@ -19,7 +19,15 @@
       <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
           <div class="site-heading">
-            <h1>Category</h1>
+            <?php if (is_category()) : ?>
+              <h1>Category</h1>
+            <?php elseif (is_author()) : ?>
+              <h1>Author</h1>
+            <?php elseif (is_date()) : ?>
+              <h1>Date</h1>
+            <?php else : ?>
+              <h1>Tag</h1>
+            <?php endif; ?>
             <span class="subheading"><?php wp_title(''); ?></span>
           </div>
         </div>
