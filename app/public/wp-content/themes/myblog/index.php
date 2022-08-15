@@ -51,7 +51,22 @@
           <?php endwhile; ?>
           <!-- Pager -->
           <div class="clearfix">
-            <a class="btn btn-primary float-right" href="#">Older Posts &rarr;</a>
+            <?php
+            $link = get_previous_posts_link('&larr; 新しい記事へ');
+            // var_dump($link);
+            if ($link) {
+              $link = str_replace('<a', '<a class="btn btn-primary float-left"', $link);
+              echo $link;
+            }
+            ?>
+            <?php
+            $link = get_next_posts_link('古い記事へ &rarr;');
+            // var_dump($link);
+            if ($link) {
+              $link = str_replace('<a', '<a class="btn btn-primary float-right"', $link);
+              echo $link;
+            }
+            ?>
           </div>
         <?php else : ?>
           <p>記事が見つかりませんでした</p>
