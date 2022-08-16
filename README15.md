@@ -187,3 +187,44 @@ function get_eyecatch_with_default()
 + WP管理画面 => `外観` => `メニュー` => `メニュー項目を追加` => `固定ページ` => `フロントページ`を選択 => `メニューを追加`をクリック => `メニューを保存`<br>
 
 + サイトをリロードするとメニューバーに`フロントページ`が追加表示されている(確認後削除)<br>
+
+## 42. 画面表示の時はエスケープ処理しよう
+
++ [esc_html](https://wpdocs.osdn.jp/%E9%96%A2%E6%95%B0%E3%83%AA%E3%83%95%E3%82%A1%E3%83%AC%E3%83%B3%E3%82%B9/esc_html)<br>
+
++ [esc_attr](https://wpdocs.osdn.jp/%E9%96%A2%E6%95%B0%E3%83%AA%E3%83%95%E3%82%A1%E3%83%AC%E3%83%B3%E3%82%B9/esc_attr)<br>
+
++ `myblog/includes/header.php`を編集<br>
+
+```php:header.php
+<?php wp_body_open(); ?>
+
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+  <div class="container">
+    <a class="navbar-brand" href="index.html">Start Bootstrap</a>
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+      Menu
+      <i class="fas fa-bars"></i>
+    </button>
+
+    <?php
+    // メニューIDを取得する
+    $menu_name = 'global_nav';
+    $locations = get_nav_menu_locations();
+    $menu = wp_get_nav_menu_object($locations[$menu_name]);
+    $menu_items = wp_get_nav_menu_items($menu->term_id);
+    ?>
+
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav ml-auto">
+        <?php foreach ($menu_items as $item) : ?>
+          <li class="nav-item">
+            <a class="nav-link" href="<?php echo esc_attr($item->url); ?>"><?php echo esc_html($item->title); ?></a> // 編集
+          </li>
+        <?php endforeach; ?>
+      </ul>
+    </div>
+  </div>
+</nav>
+```
